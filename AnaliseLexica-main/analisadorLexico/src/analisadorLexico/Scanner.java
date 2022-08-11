@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Scanner {
 	private int col;
-	private int linErro = 1;
+	private int lin = 1;
 	
 	public static HashMap<String, String> tabelaSimbolos() {
 		// palavras reservadas -> hash map
@@ -17,8 +17,8 @@ public class Scanner {
 		hm.put("se","se");
 		hm.put("entao","entao");
 		hm.put("fimse","fimse");
-		hm.put("Repita","Repita");
-		hm.put("fimRepita","fimRepita");
+		hm.put("repita","repita");
+		hm.put("fimrepita","fimrepita");
 		hm.put("fim","fim");
 		hm.put("inteiro","inteiro");
 		hm.put("literal","literal");
@@ -61,22 +61,23 @@ public class Scanner {
 					else {
 						tipo_tabela = hm.get(token.getLexema());
 						token.setTipo(hm.get(token.getLexema()));
+						token.setClasse(hm.get(token.getLexema()));
 						
 					}
 				}
 			//	System.out.println("Classe: " + hm.get(token.getLexema()) + 
 			//						", Lexema: " + token.getLexema() + ", tipo: " 
 			//						+ tipo_tabela);
-				System.out.println(token);
+			//	System.out.println(token);
 			}
 			else { 
 				tipo_tabela = token.tipoLexema(token.getClasse(), token.getLexema());
 				token.setTipo(token.tipoLexema(token.getClasse(), token.getLexema()));
-				System.out.println(token);
+			//	System.out.println(token);
 			}
 			if(token.getClasse().equals("ERRO")) 
 				System.out.println("\tERRO lexico – Caractere invalido na\n"
-									+ "\tlinguagem. Linha " + linErro + ", coluna " 
+									+ "\tlinguagem. Linha " + lin + ", coluna " 
 									+ gt.getPosErro() + "\n\tTipo: " + token.getMsgErro() 
 									+ ".");
 		}
@@ -91,15 +92,19 @@ public class Scanner {
 		this.col = col;
 	}
 
-	public int getLinErro() {
-		return linErro;
+	public int getLin() {
+		return lin;
 	}
 
-	public void setLinErro(int linErro) {
-		this.linErro = linErro;
+	public void setLin(int lin) {
+		this.lin = lin;
 	}
-	public void incrementaLinErro() {
-		linErro += 1;
-		setLinErro(linErro);
+	public void incrementaLin() {
+		lin += 1;
+		setLin(lin);
+	}
+	public void decrementaLin() {
+		lin -= 1;
+		setLin(lin);
 	}
 }
