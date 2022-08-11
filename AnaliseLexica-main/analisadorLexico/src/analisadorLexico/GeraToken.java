@@ -178,7 +178,7 @@ public class GeraToken {
 					temp+= currentChar;
 					estado = 29;
 					setPosErro(pos);
-					msgErro = "numeoro Invalido";
+					msgErro = "numero Invalido";
 				}
 				break;
 			case 4:
